@@ -1,62 +1,87 @@
+'use client';
+
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { aiModelsApi, newsApi } from "@/lib/api";
 
 export default function Home() {
-  // 인기 AI 모델 목록 (예시 데이터)
-  const popularAIModels = [
-    {
-      id: 1,
-      name: "GPT-4o",
-      category: "텍스트 생성",
-      company: "OpenAI",
-      image: "/placeholder-ai-1.png"
-    },
-    {
-      id: 2,
-      name: "Claude 3 Opus",
-      category: "텍스트 생성",
-      company: "Anthropic",
-      image: "/placeholder-ai-2.png"
-    },
-    {
-      id: 3,
-      name: "Midjourney v6",
-      category: "이미지 생성",
-      company: "Midjourney",
-      image: "/placeholder-ai-3.png"
-    },
-    {
-      id: 4,
-      name: "Gemini Pro",
-      category: "텍스트 생성",
-      company: "Google",
-      image: "/placeholder-ai-4.png"
-    },
-  ];
+  const [popularAIModels, setPopularAIModels] = useState([]);
+  const [latestNews, setLatestNews] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // 최신 AI 뉴스 (예시 데이터)
-  const latestNews = [
-    {
-      id: 1,
-      title: "OpenAI, GPT-4o 모델 출시 발표",
-      date: "2024-05-13",
-      excerpt: "OpenAI가 텍스트, 이미지, 오디오를 모두 처리할 수 있는 새로운 멀티모달 모델 GPT-4o를 발표했습니다."
-    },
-    {
-      id: 2,
-      title: "Google I/O에서 Gemini 2.0 공개",
-      date: "2024-05-10",
-      excerpt: "Google이 연례 개발자 컨퍼런스에서 Gemini의 새로운 버전을 공개했습니다."
-    },
-    {
-      id: 3,
-      title: "Anthropic, Claude 3.5 개발 중",
-      date: "2024-05-08",
-      excerpt: "Anthropic이 Claude 3 시리즈의 후속작인 Claude 3.5를 개발 중이라고 밝혔습니다."
-    },
-  ];
+  // API에서 데이터 가져오기
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const aiModelsData = await aiModelsApi.getAll();
+        const newsData = await newsApi.getAll();
+
+        setPopularAIModels(aiModelsData);
+        setLatestNews(newsData);
+      } catch (error) {
+        console.error('데이터를 가져오는데 실패했습니다:', error);
+        // 오류 발생 시 기본 데이터 설정
+        setPopularAIModels([
+          {
+            id: 1,
+            name: 'GPT-4o',
+            category: '텍스트 생성',
+            company: 'OpenAI',
+            image: '/placeholder-ai-1.png'
+          },
+          {
+            id: 2,
+            name: 'Claude 3 Opus',
+            category: '텍스트 생성',
+            company: 'Anthropic',
+            image: '/placeholder-ai-2.png'
+          },
+          {
+            id: 3,
+            name: 'Midjourney v6',
+            category: '이미지 생성',
+            company: 'Midjourney',
+            image: '/placeholder-ai-3.png'
+          },
+          {
+            id: 4,
+            name: 'Gemini Pro',
+            category: '텍스트 생성',
+            company: 'Google',
+            image: '/placeholder-ai-4.png'
+          }
+        ]);
+
+        setLatestNews([
+          {
+            id: 1,
+            title: 'OpenAI, GPT-4o 모델 출시 발표',
+            date: '2024-05-13',
+            excerpt: 'OpenAI가 텍스트, 이미지, 오디오를 모두 처리할 수 있는 새로운 멀티모달 모델 GPT-4o를 발표했습니다.'
+          },
+          {
+            id: 2,
+            title: 'Google I/O에서 Gemini 2.0 공개',
+            date: '2024-05-10',
+            excerpt: 'Google이 연례 개발자 컨퍼런스에서 Gemini의 새로운 버전을 공개했습니다.'
+          },
+          {
+            id: 3,
+            title: 'Anthropic, Claude 3.5 개발 중',
+            date: '2024-05-08',
+            excerpt: 'Anthropic이 Claude 3 시리즈의 후속작인 Claude 3.5를 개발 중이라고 밝혔습니다.'
+          }
+        ]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -99,25 +124,32 @@ export default function Home() {
             <Link href="/ai-models">모두 보기</Link>
           </Button>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {popularAIModels.map((model) => (
-            <Card key={model.id} className="overflow-hidden border border-border/50 hover:border-primary/50 transition-colors group">
-              <div className="h-48 bg-secondary/20 flex items-center justify-center group-hover:bg-secondary/30 transition-colors">
-                {/* 실제 구현 시에는 실제 이미지로 교체 */}
-                <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center group-hover:bg-primary/30 transition-colors">
-                  <div className="text-4xl font-bold text-primary">{model.name.charAt(0)}</div>
+
+        {loading ? (
+          <div className="text-center py-12">
+            <p className="text-xl text-muted-foreground">AI 모델을 불러오는 중...</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {popularAIModels.map((model) => (
+              <Card key={model.id} className="overflow-hidden border border-border/50 hover:border-primary/50 transition-colors group">
+                <div className="h-48 bg-secondary/20 flex items-center justify-center group-hover:bg-secondary/30 transition-colors">
+                  {/* 실제 구현 시에는 실제 이미지로 교체 */}
+                  <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center group-hover:bg-primary/30 transition-colors">
+                    <div className="text-4xl font-bold text-primary">{model.name.charAt(0)}</div>
+                  </div>
                 </div>
-              </div>
-              <CardContent className="p-4">
-                <h3 className="text-xl font-semibold mb-1 group-hover:text-primary transition-colors">{model.name}</h3>
-                <p className="text-sm text-muted-foreground mb-2">{model.company}</p>
-                <div className="inline-block bg-primary/10 text-primary text-xs px-2 py-1 rounded-full">
-                  {model.category}
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+                <CardContent className="p-4">
+                  <h3 className="text-xl font-semibold mb-1 group-hover:text-primary transition-colors">{model.name}</h3>
+                  <p className="text-sm text-muted-foreground mb-2">{model.company}</p>
+                  <div className="inline-block bg-primary/10 text-primary text-xs px-2 py-1 rounded-full">
+                    {model.category}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        )}
       </section>
 
       {/* 최신 AI 뉴스 섹션 */}
@@ -131,20 +163,27 @@ export default function Home() {
             <Link href="/news">모두 보기</Link>
           </Button>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {latestNews.map((news) => (
-            <Card key={news.id} className="border border-border/50 hover:border-primary/50 transition-colors group">
-              <CardContent className="p-6">
-                <p className="text-sm text-muted-foreground mb-2">{news.date}</p>
-                <h3 className="text-xl font-semibold mb-3 group-hover:text-primary transition-colors">{news.title}</h3>
-                <p className="text-muted-foreground mb-4">{news.excerpt}</p>
-                <Button variant="link" className="px-0 text-primary" asChild>
-                  <Link href={`/news/${news.id}`}>자세히 보기</Link>
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+
+        {loading ? (
+          <div className="text-center py-12">
+            <p className="text-xl text-muted-foreground">뉴스를 불러오는 중...</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {latestNews.map((news) => (
+              <Card key={news.id} className="border border-border/50 hover:border-primary/50 transition-colors group">
+                <CardContent className="p-6">
+                  <p className="text-sm text-muted-foreground mb-2">{news.date}</p>
+                  <h3 className="text-xl font-semibold mb-3 group-hover:text-primary transition-colors">{news.title}</h3>
+                  <p className="text-muted-foreground mb-4">{news.excerpt}</p>
+                  <Button variant="link" className="px-0 text-primary" asChild>
+                    <Link href={`/news/${news.id}`}>자세히 보기</Link>
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        )}
       </section>
 
       {/* 커뮤니티 섹션 */}
