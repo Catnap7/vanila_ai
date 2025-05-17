@@ -76,6 +76,51 @@ export const aiModelsApi = {
       console.error('AI 모델 API 오류:', error);
       return null;
     }
+  },
+
+  // AI 모델 상세 정보 가져오기
+  getModelDetails: async (modelId: number) => {
+    try {
+      const { data, error } = await supabase
+        .from('ai_model_details')
+        .select('*')
+        .eq('model_id', modelId)
+        .single();
+
+      if (error) {
+        console.error('AI 모델 상세 정보 가져오기 오류:', error);
+        return null;
+      }
+
+      return data;
+    } catch (error) {
+      console.error('AI 모델 상세 정보 API 오류:', error);
+      return null;
+    }
+  },
+
+  // 모든 AI 모델과 상세 정보 함께 가져오기
+  getAllWithDetails: async () => {
+    try {
+      // 모든 AI 모델 가져오기
+      const models = await aiModelsApi.getAll();
+
+      // 각 모델의 상세 정보 가져오기
+      const modelsWithDetails = await Promise.all(
+        models.map(async (model) => {
+          const details = await aiModelsApi.getModelDetails(model.id);
+          return {
+            ...model,
+            details: details || null
+          };
+        })
+      );
+
+      return modelsWithDetails;
+    } catch (error) {
+      console.error('AI 모델 및 상세 정보 API 오류:', error);
+      return [];
+    }
   }
 };
 

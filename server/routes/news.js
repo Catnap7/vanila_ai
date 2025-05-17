@@ -66,7 +66,7 @@ router.patch('/:id', async (req, res) => {
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
-});
+});455
 
 // 뉴스 삭제
 router.delete('/:id', async (req, res) => {
