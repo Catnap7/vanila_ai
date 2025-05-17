@@ -5,6 +5,7 @@ VanillaAI는 다양한 생성형 AI 모델을 비교하고 커뮤니티와 소�
 - UI 다듬기 전 초기화면 - 
 ![image](https://github.com/user-attachments/assets/812b1d6a-a3bf-4f89-aa1d-f04f250f915e)
 ![image](https://github.com/user-attachments/assets/0d36b5f8-8799-4ccc-8d1c-1509078d95b6)
+![image](https://github.com/user-attachments/assets/21ca980e-df13-4f57-8ccc-15f8de2f1965)
 
 
 
