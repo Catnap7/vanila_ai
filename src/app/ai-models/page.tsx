@@ -6,6 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
 import { aiModelsApi } from '@/lib/api';
+import ModelCompareSelector from '@/components/ModelCompareSelector';
 
 export default function AIModelsPage() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -92,6 +93,11 @@ export default function AIModelsPage() {
         </p>
       </div>
 
+      {/* 모델 비교 선택기 */}
+      <div className="mb-12 p-6 border rounded-lg bg-muted/10">
+        <ModelCompareSelector />
+      </div>
+
       {/* 검색 및 필터 */}
       <div className="flex flex-col md:flex-row gap-4 mb-8">
         <Input
@@ -131,13 +137,13 @@ export default function AIModelsPage() {
                       {model.category}
                     </div>
                   </div>
-                  
+
                   <div className="space-y-4">
                     <div>
                       <p className="text-sm font-medium">요금제</p>
                       <p>{model.pricing}</p>
                     </div>
-                    
+
                     <div>
                       <p className="text-sm font-medium">주요 기능</p>
                       <ul className="list-disc list-inside text-sm">
@@ -146,7 +152,7 @@ export default function AIModelsPage() {
                         ))}
                       </ul>
                     </div>
-                    
+
                     <div className="flex justify-between">
                       <div>
                         <p className="text-sm font-medium">인기도</p>
@@ -158,7 +164,7 @@ export default function AIModelsPage() {
                       </div>
                     </div>
                   </div>
-                  
+
                   <Button className="w-full mt-6" asChild>
                     <a href={`/ai-models/${model.id}`}>자세히 보기</a>
                   </Button>
