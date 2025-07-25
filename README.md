@@ -156,75 +156,18 @@ interface CommunityPost {
 }
 ```
 
-## 🚀 설치 및 실행
+## 🚀 빠른 시작
 
-### 사전 요구사항
-- Node.js 18.0.0 이상
-- npm, yarn, 또는 pnpm
-- MongoDB (로컬 또는 클라우드)
-- Supabase 계정 (선택사항)
+VanillaAI를 로컬 환경에서 실행하려면 **[SETUP.md](./SETUP.md)** 파일을 참조하세요.
 
-### 1. 저장소 클론
-```bash
-git clone https://github.com/Catnap7/vanila_ai.git
-cd vanila_ai
-```
+📋 **설치 가이드에 포함된 내용:**
+- 사전 요구사항 및 시스템 설정
+- 단계별 설치 및 환경 변수 구성
+- 개발 서버 실행 방법
+- 문제 해결 및 디버깅 가이드
+- 프로덕션 빌드 및 배포 준비
 
-### 2. 의존성 설치
-```bash
-# npm 사용
-npm install
-
-# 또는 yarn 사용
-yarn install
-
-# 또는 pnpm 사용
-pnpm install
-```
-
-### 3. 환경 변수 설정
-```bash
-# 루트 디렉토리에 .env.local 파일 생성
-cp .env.example .env.local
-```
-
-`.env.local` 파일을 편집하여 다음 값들을 설정하세요:
-```env
-# 프론트엔드 환경 변수
-NEXT_PUBLIC_API_URL=http://localhost:5000/api
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_url_here
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key_here
-
-# 백엔드 환경 변수 (server/.env)
-PORT=5000
-MONGO_URI=mongodb://localhost:27017/vanillaai
-NODE_ENV=development
-```
-
-### 4. 백엔드 서버 실행
-```bash
-# 백엔드 디렉토리로 이동
-cd server
-
-# 서버 실행
-npm start
-# 또는 개발 모드
-npm run dev
-```
-
-### 5. 프론트엔드 개발 서버 실행
-```bash
-# 루트 디렉토리에서
-npm run dev
-# 또는
-yarn dev
-# 또는
-pnpm dev
-```
-
-### 6. 브라우저에서 확인
-- **프론트엔드**: http://localhost:3000
-- **백엔드 API**: http://localhost:5000/api
+> 💡 **빠른 실행**: `git clone` → `npm install` → 환경 변수 설정 → `npm run dev`
 
 ## 🔧 개발 가이드라인
 
