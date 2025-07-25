@@ -41,77 +41,141 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  /* Custom shadow utilities */
+  --shadow-soft: 0 2px 8px 0 rgba(0, 0, 0, 0.05);
+  --shadow-medium: 0 4px 16px 0 rgba(0, 0, 0, 0.08);
+  --shadow-strong: 0 8px 32px 0 rgba(0, 0, 0, 0.12);
+  --shadow-glow: 0 0 20px 0 rgba(59, 130, 246, 0.15);
+  --shadow-glow-accent: 0 0 20px 0 rgba(139, 92, 246, 0.15);
 }
 
 :root {
-  --radius: 0.625rem;
-  /* 바닐라 테마 - 라이트 모드 */
-  --background: #FFF9E6; /* 크림색 배경 */
-  --foreground: #5C4033; /* 진한 갈색 텍스트 */
-  --card: #FFFBF0; /* 약간 더 밝은 크림색 */
-  --card-foreground: #5C4033; /* 진한 갈색 텍스트 */
-  --popover: #FFFBF0;
-  --popover-foreground: #5C4033;
-  --primary: #8B5A2B; /* 바닐라 빈 색상 */
-  --primary-foreground: #FFF9E6; /* 크림색 텍스트 */
-  --secondary: #F8E8C6; /* 연한 바닐라 색상 */
-  --secondary-foreground: #5C4033; /* 진한 갈색 텍스트 */
-  --muted: #F8E8C6; /* 연한 바닐라 색상 */
-  --muted-foreground: #8B5A2B; /* 바닐라 빈 색상 */
-  --accent: #F5DEB3; /* 밀색 (바닐라 쿠키) */
-  --accent-foreground: #5C4033; /* 진한 갈색 텍스트 */
-  --destructive: #E53935; /* 빨간색 */
-  --border: #E6D7B8; /* 연한 베이지 테두리 */
-  --input: #E6D7B8; /* 연한 베이지 입력 필드 */
-  --ring: #D4B483; /* 중간 톤의 바닐라 */
-  --chart-1: #8B5A2B; /* 바닐라 빈 */
-  --chart-2: #D4B483; /* 중간 톤의 바닐라 */
-  --chart-3: #F5DEB3; /* 밀색 */
-  --chart-4: #F8E8C6; /* 연한 바닐라 */
-  --chart-5: #FFF9E6; /* 크림색 */
-  --sidebar: #FFFBF0; /* 약간 더 밝은 크림색 */
-  --sidebar-foreground: #5C4033; /* 진한 갈색 텍스트 */
-  --sidebar-primary: #8B5A2B; /* 바닐라 빈 색상 */
-  --sidebar-primary-foreground: #FFF9E6; /* 크림색 텍스트 */
-  --sidebar-accent: #F5DEB3; /* 밀색 */
-  --sidebar-accent-foreground: #5C4033; /* 진한 갈색 텍스트 */
-  --sidebar-border: #E6D7B8; /* 연한 베이지 테두리 */
-  --sidebar-ring: #D4B483; /* 중간 톤의 바닐라 */
+  --radius: 0.75rem;
+
+  /* Enterprise Light Theme - Inspired by Notion/Linear/Vercel */
+  --background: #FAFAFA; /* Clean white-gray background */
+  --foreground: #0F172A; /* Rich dark text */
+  --card: #FFFFFF; /* Pure white cards */
+  --card-foreground: #0F172A; /* Rich dark text */
+  --popover: #FFFFFF;
+  --popover-foreground: #0F172A;
+
+  /* Primary - Modern Blue */
+  --primary: #3B82F6; /* Vibrant blue */
+  --primary-foreground: #FFFFFF;
+  --primary-hover: #2563EB; /* Darker blue on hover */
+
+  /* Secondary - Sophisticated Purple */
+  --secondary: #F1F5F9; /* Light slate background */
+  --secondary-foreground: #475569; /* Medium slate text */
+  --secondary-hover: #E2E8F0; /* Slightly darker on hover */
+
+  /* Accent - Energetic Violet */
+  --accent: #8B5CF6; /* Vibrant violet */
+  --accent-foreground: #FFFFFF;
+  --accent-hover: #7C3AED; /* Darker violet on hover */
+
+  /* Semantic Colors */
+  --success: #10B981; /* Emerald green */
+  --success-foreground: #FFFFFF;
+  --warning: #F59E0B; /* Amber */
+  --warning-foreground: #FFFFFF;
+  --error: #EF4444; /* Red */
+  --error-foreground: #FFFFFF;
+  --info: #06B6D4; /* Cyan */
+  --info-foreground: #FFFFFF;
+
+  /* Neutral Colors */
+  --muted: #F8FAFC; /* Very light slate */
+  --muted-foreground: #64748B; /* Medium slate */
+  --border: #E2E8F0; /* Light slate border */
+  --input: #F8FAFC; /* Light input background */
+  --ring: #3B82F6; /* Blue focus ring */
+
+  /* Destructive */
+  --destructive: #EF4444; /* Red */
+  --destructive-foreground: #FFFFFF;
+
+  /* Chart Colors - Rich and Diverse */
+  --chart-1: #3B82F6; /* Blue */
+  --chart-2: #8B5CF6; /* Violet */
+  --chart-3: #10B981; /* Emerald */
+  --chart-4: #F59E0B; /* Amber */
+  --chart-5: #EF4444; /* Red */
+
+  /* Sidebar */
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #0F172A;
+  --sidebar-primary: #3B82F6;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #F1F5F9;
+  --sidebar-accent-foreground: #475569;
+  --sidebar-border: #E2E8F0;
+  --sidebar-ring: #3B82F6;
 }
 
 .dark {
-  /* 바닐라 테마 - 다크 모드 */
-  --background: #3C2A21; /* 진한 초콜릿 갈색 배경 */
-  --foreground: #FFF9E6; /* 크림색 텍스트 */
-  --card: #4E3629; /* 약간 더 밝은 초콜릿 갈색 */
-  --card-foreground: #FFF9E6; /* 크림색 텍스트 */
-  --popover: #4E3629;
-  --popover-foreground: #FFF9E6;
-  --primary: #F5DEB3; /* 밀색 (바닐라 쿠키) */
-  --primary-foreground: #3C2A21; /* 진한 초콜릿 갈색 */
-  --secondary: #6B4F35; /* 중간 갈색 */
-  --secondary-foreground: #FFF9E6; /* 크림색 텍스트 */
-  --muted: #6B4F35; /* 중간 갈색 */
-  --muted-foreground: #E6D7B8; /* 연한 베이지 */
-  --accent: #8B5A2B; /* 바닐라 빈 색상 */
-  --accent-foreground: #FFF9E6; /* 크림색 텍스트 */
-  --destructive: #F44336; /* 빨간색 */
-  --border: #6B4F35; /* 중간 갈색 테두리 */
-  --input: #6B4F35; /* 중간 갈색 입력 필드 */
-  --ring: #D4B483; /* 중간 톤의 바닐라 */
-  --chart-1: #F5DEB3; /* 밀색 */
-  --chart-2: #D4B483; /* 중간 톤의 바닐라 */
-  --chart-3: #8B5A2B; /* 바닐라 빈 */
-  --chart-4: #6B4F35; /* 중간 갈색 */
-  --chart-5: #4E3629; /* 약간 더 밝은 초콜릿 갈색 */
-  --sidebar: #4E3629; /* 약간 더 밝은 초콜릿 갈색 */
-  --sidebar-foreground: #FFF9E6; /* 크림색 텍스트 */
-  --sidebar-primary: #F5DEB3; /* 밀색 */
-  --sidebar-primary-foreground: #3C2A21; /* 진한 초콜릿 갈색 */
-  --sidebar-accent: #8B5A2B; /* 바닐라 빈 색상 */
-  --sidebar-accent-foreground: #FFF9E6; /* 크림색 텍스트 */
-  --sidebar-border: #6B4F35; /* 중간 갈색 테두리 */
-  --sidebar-ring: #D4B483; /* 중간 톤의 바닐라 */
+  /* Enterprise Dark Theme - Sophisticated and Modern */
+  --background: #0F172A; /* Rich dark navy */
+  --foreground: #F8FAFC; /* Clean light text */
+  --card: #1E293B; /* Elevated dark surface */
+  --card-foreground: #F8FAFC; /* Clean light text */
+  --popover: #1E293B;
+  --popover-foreground: #F8FAFC;
+
+  /* Primary - Bright Blue for Dark Mode */
+  --primary: #60A5FA; /* Lighter blue for contrast */
+  --primary-foreground: #0F172A; /* Dark text on light blue */
+  --primary-hover: #3B82F6; /* Standard blue on hover */
+
+  /* Secondary - Dark Slate */
+  --secondary: #334155; /* Medium dark slate */
+  --secondary-foreground: #CBD5E1; /* Light slate text */
+  --secondary-hover: #475569; /* Darker slate on hover */
+
+  /* Accent - Bright Violet */
+  --accent: #A78BFA; /* Lighter violet for contrast */
+  --accent-foreground: #0F172A; /* Dark text on light violet */
+  --accent-hover: #8B5CF6; /* Standard violet on hover */
+
+  /* Semantic Colors - Adjusted for Dark Mode */
+  --success: #34D399; /* Lighter emerald */
+  --success-foreground: #0F172A;
+  --warning: #FBBF24; /* Lighter amber */
+  --warning-foreground: #0F172A;
+  --error: #F87171; /* Lighter red */
+  --error-foreground: #0F172A;
+  --info: #22D3EE; /* Lighter cyan */
+  --info-foreground: #0F172A;
+
+  /* Neutral Colors */
+  --muted: #334155; /* Medium dark slate */
+  --muted-foreground: #94A3B8; /* Light slate */
+  --border: #334155; /* Medium dark slate border */
+  --input: #334155; /* Dark input background */
+  --ring: #60A5FA; /* Light blue focus ring */
+
+  /* Destructive */
+  --destructive: #F87171; /* Lighter red */
+  --destructive-foreground: #0F172A;
+
+  /* Chart Colors - Bright for Dark Mode */
+  --chart-1: #60A5FA; /* Light blue */
+  --chart-2: #A78BFA; /* Light violet */
+  --chart-3: #34D399; /* Light emerald */
+  --chart-4: #FBBF24; /* Light amber */
+  --chart-5: #F87171; /* Light red */
+
+  /* Sidebar */
+  --sidebar: #1E293B;
+  --sidebar-foreground: #F8FAFC;
+  --sidebar-primary: #60A5FA;
+  --sidebar-primary-foreground: #0F172A;
+  --sidebar-accent: #334155;
+  --sidebar-accent-foreground: #CBD5E1;
+  --sidebar-border: #334155;
+  --sidebar-ring: #60A5FA;
 }
 
 @layer base {
@@ -119,6 +183,101 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-muted;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-border rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/50;
+  }
+}
+
+@layer components {
+  /* Glass morphism effect */
+  .glass {
+    @apply bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border border-white/20 dark:border-slate-700/50;
+  }
+
+  /* Gradient backgrounds */
+  .gradient-primary {
+    background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--accent)) 100%);
+  }
+
+  .gradient-secondary {
+    background: linear-gradient(135deg, hsl(var(--secondary)) 0%, hsl(var(--muted)) 100%);
+  }
+
+  /* Text gradients */
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
+  }
+
+  /* Shimmer effect for loading states */
+  .shimmer {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+
+  /* Enhanced button hover effects */
+  .btn-hover-lift {
+    @apply transition-all duration-200 hover:shadow-medium hover:-translate-y-0.5;
+  }
+
+  /* Card hover effects */
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-strong hover:-translate-y-1;
+  }
+
+  /* Typography utilities */
+  .text-display {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight;
+  }
+
+  .text-heading {
+    @apply text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight;
+  }
+
+  .text-subheading {
+    @apply text-xl md:text-2xl font-semibold tracking-tight;
+  }
+
+  .text-body-large {
+    @apply text-lg leading-relaxed;
+  }
+
+  .text-body {
+    @apply text-base leading-relaxed;
+  }
+
+  .text-body-small {
+    @apply text-sm leading-relaxed;
+  }
+
+  .text-caption {
+    @apply text-xs font-medium tracking-wide uppercase;
+  }
+
+  /* Focus states */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background;
   }
 }

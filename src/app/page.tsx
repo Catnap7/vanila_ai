@@ -5,6 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { StatsCard } from "@/components/ui/stats-card";
+import { Loading } from "@/components/ui/loading";
+import { AnimatedBackground, FloatingElements, GradientOrb } from "@/components/ui/animated-background";
+import { HoverCard, MagneticButton, RevealAnimation } from "@/components/ui/hover-effects";
 import { aiModelsApi, newsApi } from "@/lib/api";
 
 export default function Home() {
@@ -84,121 +89,302 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="min-h-screen">
       {/* 히어로 섹션 */}
-      <section className="py-16 md:py-24 text-center relative overflow-hidden">
-        {/* 배경 요소 - 바닐라 패턴 */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(#8B5A2B_1px,transparent_1px)] [background-size:20px_20px]"></div>
-        </div>
+      <section className="relative py-20 md:py-32 overflow-hidden">
+        <AnimatedBackground variant="particles" className="absolute inset-0">
+          <GradientOrb size="xl" className="top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2" />
+          <GradientOrb size="lg" color="accent" className="bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2" />
+          <FloatingElements />
+        </AnimatedBackground>
 
-        <div className="relative z-10">
-          <div className="inline-block mb-4 px-4 py-1 rounded-full bg-secondary/50 text-primary font-medium text-sm">
-            생성형 AI를 위한 최고의 커뮤니티
-          </div>
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-            생성형 AI 모델 비교 및 커뮤니티
-          </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
-            다양한 생성형 AI 모델을 비교하고, 최신 소식을 확인하며, 커뮤니티와 함께 소통하세요.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground" asChild>
-              <Link href="/ai-models">AI 모델 비교하기</Link>
-            </Button>
-            <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary/10" asChild>
-              <Link href="/community">커뮤니티 참여하기</Link>
-            </Button>
-          </div>
+        <div className="container mx-auto px-4 relative z-10">
+          <RevealAnimation direction="up" className="text-center">
+            <Badge variant="gradient" size="lg" className="mb-6 animate-fade-in">
+              🚀 차세대 AI 플랫폼
+            </Badge>
+
+            <h1 className="text-display mb-6 text-gradient max-w-5xl mx-auto leading-tight">
+              엔터프라이즈급 생성형 AI
+              <br className="hidden md:block" />
+              모델 비교 플랫폼
+            </h1>
+
+            <p className="text-body-large text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
+              최신 AI 모델을 실시간으로 비교하고, 전문가 커뮤니티와 소통하며,
+              AI 업계의 최신 동향을 한눈에 파악하세요.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <MagneticButton>
+                <Button size="xl" variant="gradient" className="btn-hover-lift shadow-glow" asChild>
+                  <Link href="/ai-models">
+                    AI 모델 탐색하기
+                    <span className="ml-2">→</span>
+                  </Link>
+                </Button>
+              </MagneticButton>
+
+              <MagneticButton>
+                <Button size="xl" variant="outline" className="btn-hover-lift" asChild>
+                  <Link href="/community">
+                    커뮤니티 참여
+                    <span className="ml-2">💬</span>
+                  </Link>
+                </Button>
+              </MagneticButton>
+            </div>
+          </RevealAnimation>
+        </div>
+      </section>
+
+      {/* 통계 섹션 */}
+      <section className="py-16 bg-gradient-to-br from-secondary/5 to-accent/5">
+        <div className="container mx-auto px-4">
+          <RevealAnimation direction="up" delay={0.2}>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-16">
+              <StatsCard
+                title="AI 모델"
+                value="50+"
+                change={{ value: "+12", type: "increase" }}
+                description="이번 달"
+                variant="primary"
+                icon={<span className="text-2xl">🤖</span>}
+              />
+              <StatsCard
+                title="활성 사용자"
+                value="10K+"
+                change={{ value: "+25%", type: "increase" }}
+                description="월간 활성 사용자"
+                variant="success"
+                icon={<span className="text-2xl">👥</span>}
+              />
+              <StatsCard
+                title="커뮤니티 게시글"
+                value="2.5K+"
+                change={{ value: "+18%", type: "increase" }}
+                description="이번 주"
+                variant="info"
+                icon={<span className="text-2xl">💬</span>}
+              />
+              <StatsCard
+                title="AI 뉴스"
+                value="500+"
+                change={{ value: "+8", type: "increase" }}
+                description="매일 업데이트"
+                variant="warning"
+                icon={<span className="text-2xl">📰</span>}
+              />
+            </div>
+          </RevealAnimation>
         </div>
       </section>
 
       {/* 인기 AI 모델 섹션 */}
-      <section className="py-16 border-t border-border/50">
-        <div className="flex justify-between items-center mb-8">
-          <div>
-            <div className="w-16 h-1 bg-primary mb-4"></div>
-            <h2 className="text-3xl font-bold">인기 AI 모델</h2>
+      <section className="py-20 container mx-auto px-4">
+        <RevealAnimation direction="up" delay={0.3}>
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-1 h-8 bg-gradient-to-b from-primary to-accent rounded-full"></div>
+                <Badge variant="outline" size="sm">인기 모델</Badge>
+              </div>
+              <h2 className="text-heading mb-2">최고 성능의 AI 모델들</h2>
+              <p className="text-muted-foreground">전문가들이 선택한 검증된 AI 모델을 만나보세요</p>
+            </div>
+            <MagneticButton>
+              <Button variant="ghost" className="text-primary hover:text-primary-hover group" asChild>
+                <Link href="/ai-models">
+                  모든 모델 보기
+                  <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+                </Link>
+              </Button>
+            </MagneticButton>
           </div>
-          <Button variant="ghost" className="text-primary hover:text-primary/90 hover:bg-secondary/50" asChild>
-            <Link href="/ai-models">모두 보기</Link>
-          </Button>
-        </div>
+        </RevealAnimation>
 
         {loading ? (
-          <div className="text-center py-12">
-            <p className="text-xl text-muted-foreground">AI 모델을 불러오는 중...</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="animate-fade-in" style={{ animationDelay: `${i * 0.1}s` }}>
+                <div className="rounded-xl border border-border/50 p-6 space-y-4 bg-card shadow-soft">
+                  <div className="h-32 bg-gradient-to-r from-muted via-muted/50 to-muted rounded-lg shimmer"></div>
+                  <div className="space-y-2">
+                    <div className="h-4 bg-gradient-to-r from-muted via-muted/50 to-muted rounded shimmer w-3/4"></div>
+                    <div className="h-3 bg-gradient-to-r from-muted via-muted/50 to-muted rounded shimmer w-1/2"></div>
+                  </div>
+                  <div className="h-6 bg-gradient-to-r from-muted via-muted/50 to-muted rounded-full shimmer w-20"></div>
+                </div>
+              </div>
+            ))}
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {popularAIModels.map((model) => (
-              <Card key={model.id} className="overflow-hidden border border-border/50 hover:border-primary/50 transition-colors group">
-                <div className="h-48 bg-secondary/20 flex items-center justify-center group-hover:bg-secondary/30 transition-colors">
-                  {/* 실제 구현 시에는 실제 이미지로 교체 */}
-                  <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center group-hover:bg-primary/30 transition-colors">
-                    <div className="text-4xl font-bold text-primary">{model.name.charAt(0)}</div>
-                  </div>
-                </div>
-                <CardContent className="p-4">
-                  <h3 className="text-xl font-semibold mb-1 group-hover:text-primary transition-colors">{model.name}</h3>
-                  <p className="text-sm text-muted-foreground mb-2">{model.company}</p>
-                  <div className="inline-block bg-primary/10 text-primary text-xs px-2 py-1 rounded-full">
-                    {model.category}
-                  </div>
-                </CardContent>
-              </Card>
+            {popularAIModels.map((model, index) => (
+              <RevealAnimation key={model.id} direction="up" delay={0.4 + index * 0.1}>
+                <HoverCard glowColor="primary">
+                  <Card className="overflow-hidden card-hover group">
+                    <div className="relative h-48 bg-gradient-to-br from-secondary/20 to-accent/10 flex items-center justify-center">
+                      <div className="relative">
+                        <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-strong group-hover:shadow-glow transition-all duration-300 group-hover:scale-110">
+                          <div className="text-3xl font-bold text-white">{model.name.charAt(0)}</div>
+                        </div>
+                        <div className="absolute -top-2 -right-2">
+                          <Badge variant="success" size="sm" className="text-xs">
+                            HOT
+                          </Badge>
+                        </div>
+                      </div>
+                    </div>
+                    <CardContent className="p-6">
+                      <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">{model.name}</h3>
+                      <p className="text-sm text-muted-foreground mb-3">{model.company}</p>
+                      <Badge variant="outline" size="sm">
+                        {model.category}
+                      </Badge>
+                    </CardContent>
+                  </Card>
+                </HoverCard>
+              </RevealAnimation>
             ))}
           </div>
         )}
       </section>
 
-      {/* 최신 AI 뉴스 섹션 */}
-      <section className="py-16 border-t border-border/50">
-        <div className="flex justify-between items-center mb-8">
-          <div>
-            <div className="w-16 h-1 bg-primary mb-4"></div>
-            <h2 className="text-3xl font-bold">최신 AI 뉴스</h2>
-          </div>
-          <Button variant="ghost" className="text-primary hover:text-primary/90 hover:bg-secondary/50" asChild>
-            <Link href="/news">모두 보기</Link>
-          </Button>
-        </div>
+      {/* 최신 뉴스 섹션 */}
+      <section className="py-20 bg-gradient-to-br from-accent/5 to-secondary/10">
+        <div className="container mx-auto px-4">
+          <RevealAnimation direction="up" delay={0.5}>
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
+              <div>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-1 h-8 bg-gradient-to-b from-accent to-primary rounded-full"></div>
+                  <Badge variant="outline" size="sm">최신 소식</Badge>
+                </div>
+                <h2 className="text-heading mb-2">AI 업계 최신 동향</h2>
+                <p className="text-muted-foreground">실시간으로 업데이트되는 AI 뉴스와 트렌드</p>
+              </div>
+              <MagneticButton>
+                <Button variant="ghost" className="text-accent hover:text-accent-hover group" asChild>
+                  <Link href="/news">
+                    모든 뉴스 보기
+                    <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
+                  </Link>
+                </Button>
+              </MagneticButton>
+            </div>
+          </RevealAnimation>
 
-        {loading ? (
-          <div className="text-center py-12">
-            <p className="text-xl text-muted-foreground">뉴스를 불러오는 중...</p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {latestNews.map((news) => (
-              <Card key={news.id} className="border border-border/50 hover:border-primary/50 transition-colors group">
-                <CardContent className="p-6">
-                  <p className="text-sm text-muted-foreground mb-2">{news.date}</p>
-                  <h3 className="text-xl font-semibold mb-3 group-hover:text-primary transition-colors">{news.title}</h3>
-                  <p className="text-muted-foreground mb-4">{news.excerpt}</p>
-                  <Button variant="link" className="px-0 text-primary" asChild>
-                    <Link href={`/news/${news.id}`}>자세히 보기</Link>
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        )}
+          {loading ? (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[...Array(3)].map((_, i) => (
+                <div key={i} className="animate-fade-in" style={{ animationDelay: `${i * 0.1}s` }}>
+                  <div className="rounded-xl border border-border/50 p-6 space-y-4 bg-card shadow-soft">
+                    <div className="h-4 bg-gradient-to-r from-muted via-muted/50 to-muted rounded shimmer w-1/4"></div>
+                    <div className="h-6 bg-gradient-to-r from-muted via-muted/50 to-muted rounded shimmer"></div>
+                    <div className="h-4 bg-gradient-to-r from-muted via-muted/50 to-muted rounded shimmer w-3/4"></div>
+                    <div className="h-8 bg-gradient-to-r from-muted via-muted/50 to-muted rounded shimmer w-20"></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {latestNews.map((news, index) => (
+                <RevealAnimation key={news.id} direction="up" delay={0.6 + index * 0.1}>
+                  <HoverCard glowColor="accent">
+                    <Card className="card-hover group h-full">
+                      <CardContent className="p-6 flex flex-col h-full">
+                        <div className="flex items-center gap-2 mb-3">
+                          <Badge variant="info" size="sm" className="text-xs">
+                            📰 NEWS
+                          </Badge>
+                          <span className="text-xs text-muted-foreground">{news.date}</span>
+                        </div>
+                        <h3 className="text-xl font-bold mb-3 group-hover:text-accent transition-colors flex-1">
+                          {news.title}
+                        </h3>
+                        <p className="text-muted-foreground mb-4 flex-1 leading-relaxed">
+                          {news.excerpt}
+                        </p>
+                        <MagneticButton>
+                          <Button variant="link" className="px-0 text-accent hover:text-accent-hover group w-fit" asChild>
+                            <Link href={`/news/${news.id}`}>
+                              자세히 보기
+                              <span className="ml-1 group-hover:translate-x-1 transition-transform">→</span>
+                            </Link>
+                          </Button>
+                        </MagneticButton>
+                      </CardContent>
+                    </Card>
+                  </HoverCard>
+                </RevealAnimation>
+              ))}
+            </div>
+          )}
+        </div>
       </section>
 
       {/* 커뮤니티 섹션 */}
-      <section className="py-16 border-t border-border/50 bg-secondary/20 rounded-lg my-8">
-        <div className="text-center max-w-3xl mx-auto">
-          <div className="w-16 h-1 bg-primary mb-4 mx-auto"></div>
-          <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-            AI 커뮤니티에 참여하세요
-          </h2>
-          <p className="text-xl text-muted-foreground mb-8">
-            다른 사용자들과 AI 모델에 대한 경험을 공유하고, 질문하고, 토론하세요.
-          </p>
-          <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground" asChild>
-            <Link href="/community">커뮤니티 방문하기</Link>
-          </Button>
+      <section className="py-20 relative overflow-hidden">
+        <AnimatedBackground variant="dots" className="absolute inset-0">
+          <GradientOrb size="lg" color="success" className="top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2" />
+          <GradientOrb size="md" color="warning" className="bottom-1/4 right-1/3 translate-x-1/2 translate-y-1/2" />
+        </AnimatedBackground>
+
+        <div className="container mx-auto px-4 relative z-10">
+          <RevealAnimation direction="up" delay={0.7}>
+            <div className="text-center max-w-4xl mx-auto">
+              <Badge variant="gradient" size="lg" className="mb-6">
+                🌟 커뮤니티
+              </Badge>
+
+              <h2 className="text-display mb-6 text-gradient">
+                AI 전문가들과 함께 성장하세요
+              </h2>
+
+              <p className="text-body-large text-muted-foreground mb-12 leading-relaxed">
+                전 세계 AI 전문가들과 소통하고, 최신 정보를 공유하며,
+                함께 AI의 미래를 만들어가는 커뮤니티에 참여하세요.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+                <MagneticButton>
+                  <Button size="xl" variant="gradient" className="btn-hover-lift shadow-glow" asChild>
+                    <Link href="/community">
+                      커뮤니티 참여하기
+                      <span className="ml-2">🚀</span>
+                    </Link>
+                  </Button>
+                </MagneticButton>
+
+                <MagneticButton>
+                  <Button size="xl" variant="outline" className="btn-hover-lift" asChild>
+                    <Link href="/register">
+                      무료 회원가입
+                      <span className="ml-2">✨</span>
+                    </Link>
+                  </Button>
+                </MagneticButton>
+              </div>
+
+              {/* 커뮤니티 통계 */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
+                <div className="text-center p-6 rounded-xl bg-card/50 backdrop-blur-sm border border-border/50">
+                  <div className="text-3xl font-bold text-primary mb-2">10K+</div>
+                  <div className="text-sm text-muted-foreground">활성 멤버</div>
+                </div>
+                <div className="text-center p-6 rounded-xl bg-card/50 backdrop-blur-sm border border-border/50">
+                  <div className="text-3xl font-bold text-accent mb-2">2.5K+</div>
+                  <div className="text-sm text-muted-foreground">월간 게시글</div>
+                </div>
+                <div className="text-center p-6 rounded-xl bg-card/50 backdrop-blur-sm border border-border/50">
+                  <div className="text-3xl font-bold text-success mb-2">500+</div>
+                  <div className="text-sm text-muted-foreground">전문가</div>
+                </div>
+              </div>
+            </div>
+          </RevealAnimation>
         </div>
       </section>
     </div>
