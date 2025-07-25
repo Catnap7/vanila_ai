@@ -1,21 +1,14 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, memo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { aiModelsApi } from '@/lib/api';
+import { aiModelsApi, type AIModel } from '@/lib/api';
 import { useRouter } from 'next/navigation';
 
-interface AIModel {
-  id: number;
-  name: string;
-  category: string;
-  company: string;
-}
-
-export default function ModelCompareSelector() {
+const ModelCompareSelector = memo(function ModelCompareSelector() {
   const [models, setModels] = useState<AIModel[]>([]);
   const [selectedModels, setSelectedModels] = useState<number[]>([]);
   const [loading, setLoading] = useState(true);
@@ -37,7 +30,7 @@ export default function ModelCompareSelector() {
     fetchModels();
   }, []);
 
-  const handleModelToggle = (modelId: number) => {
+  const handleModelToggle = useCallback((modelId: number) => {
     setSelectedModels(prev => {
       if (prev.includes(modelId)) {
         return prev.filter(id => id !== modelId);
@@ -49,9 +42,9 @@ export default function ModelCompareSelector() {
         return [...prev, modelId];
       }
     });
-  };
+  }, []);
 
-  const handleCompare = () => {
+  const handleCompare = useCallback(() => {
     if (selectedModels.length < 2) {
       alert('비교하려면 최소 2개 이상의 모델을 선택해야 합니다.');
       return;
@@ -64,7 +57,7 @@ export default function ModelCompareSelector() {
     // 이렇게 하면 Next.js가 페이지를 새로 로드하게 됨
     const timestamp = Date.now();
     router.push(`/ai-models/compare?${queryParams}&_t=${timestamp}`);
-  };
+  }, [selectedModels, router]);
 
   if (loading) {
     return (
@@ -132,4 +125,6 @@ export default function ModelCompareSelector() {
       )}
     </div>
   );
-}
+});
+
+export default ModelCompareSelector;

@@ -31,44 +31,133 @@ inMemoryDB.aiModels = [...aiModelsData];
 inMemoryDB.news = [...newsData];
 inMemoryDB.community = [...communityData];
 
-// 메모리 내 API 라우트 설정
-app.get('/api/ai-models', (req, res) => {
-  res.json(inMemoryDB.aiModels);
-});
+// 메모리 기반 라우터 생성 함수들
+const createMemoryAIModelsRouter = () => {
+  const router = express.Router();
 
-app.get('/api/ai-models/:id', (req, res) => {
-  const model = inMemoryDB.aiModels.find(m => m.id === parseInt(req.params.id));
-  if (!model) return res.status(404).json({ message: 'AI 모델을 찾을 수 없습니다' });
-  res.json(model);
-});
+  router.get('/', (req, res) => {
+    try {
+      res.json(inMemoryDB.aiModels);
+    } catch (error) {
+      console.error('AI 모델 목록 조회 오류:', error);
+      res.status(500).json({ message: '서버 오류가 발생했습니다.' });
+    }
+  });
 
-app.get('/api/news', (req, res) => {
-  res.json(inMemoryDB.news);
-});
+  router.get('/:id', (req, res) => {
+    try {
+      const modelId = parseInt(req.params.id);
+      if (isNaN(modelId)) {
+        return res.status(400).json({ message: '유효하지 않은 모델 ID입니다.' });
+      }
 
-app.get('/api/news/:id', (req, res) => {
-  const news = inMemoryDB.news.find(n => n.id === parseInt(req.params.id));
-  if (!news) return res.status(404).json({ message: '뉴스를 찾을 수 없습니다' });
-  res.json(news);
-});
+      const model = inMemoryDB.aiModels.find(m => m.id === modelId);
+      if (!model) {
+        return res.status(404).json({ message: 'AI 모델을 찾을 수 없습니다.' });
+      }
 
-app.get('/api/community', (req, res) => {
-  res.json(inMemoryDB.community);
-});
+      res.json(model);
+    } catch (error) {
+      console.error('AI 모델 조회 오류:', error);
+      res.status(500).json({ message: '서버 오류가 발생했습니다.' });
+    }
+  });
 
-app.get('/api/community/:id', (req, res) => {
-  const post = inMemoryDB.community.find(p => p.id === parseInt(req.params.id));
-  if (!post) return res.status(404).json({ message: '게시글을 찾을 수 없습니다' });
-  res.json(post);
-});
+  return router;
+};
 
-app.post('/api/community/:id/like', (req, res) => {
-  const post = inMemoryDB.community.find(p => p.id === parseInt(req.params.id));
-  if (!post) return res.status(404).json({ message: '게시글을 찾을 수 없습니다' });
+const createMemoryNewsRouter = () => {
+  const router = express.Router();
 
-  post.likes += 1;
-  res.json({ likes: post.likes });
-});
+  router.get('/', (req, res) => {
+    try {
+      res.json(inMemoryDB.news);
+    } catch (error) {
+      console.error('뉴스 목록 조회 오류:', error);
+      res.status(500).json({ message: '서버 오류가 발생했습니다.' });
+    }
+  });
+
+  router.get('/:id', (req, res) => {
+    try {
+      const newsId = parseInt(req.params.id);
+      if (isNaN(newsId)) {
+        return res.status(400).json({ message: '유효하지 않은 뉴스 ID입니다.' });
+      }
+
+      const news = inMemoryDB.news.find(n => n.id === newsId);
+      if (!news) {
+        return res.status(404).json({ message: '뉴스를 찾을 수 없습니다.' });
+      }
+
+      res.json(news);
+    } catch (error) {
+      console.error('뉴스 조회 오류:', error);
+      res.status(500).json({ message: '서버 오류가 발생했습니다.' });
+    }
+  });
+
+  return router;
+};
+
+const createMemoryCommunityRouter = () => {
+  const router = express.Router();
+
+  router.get('/', (req, res) => {
+    try {
+      res.json(inMemoryDB.community);
+    } catch (error) {
+      console.error('커뮤니티 목록 조회 오류:', error);
+      res.status(500).json({ message: '서버 오류가 발생했습니다.' });
+    }
+  });
+
+  router.get('/:id', (req, res) => {
+    try {
+      const postId = parseInt(req.params.id);
+      if (isNaN(postId)) {
+        return res.status(400).json({ message: '유효하지 않은 게시글 ID입니다.' });
+      }
+
+      const post = inMemoryDB.community.find(p => p.id === postId);
+      if (!post) {
+        return res.status(404).json({ message: '게시글을 찾을 수 없습니다.' });
+      }
+
+      res.json(post);
+    } catch (error) {
+      console.error('게시글 조회 오류:', error);
+      res.status(500).json({ message: '서버 오류가 발생했습니다.' });
+    }
+  });
+
+  router.post('/:id/like', (req, res) => {
+    try {
+      const postId = parseInt(req.params.id);
+      if (isNaN(postId)) {
+        return res.status(400).json({ message: '유효하지 않은 게시글 ID입니다.' });
+      }
+
+      const post = inMemoryDB.community.find(p => p.id === postId);
+      if (!post) {
+        return res.status(404).json({ message: '게시글을 찾을 수 없습니다.' });
+      }
+
+      post.likes += 1;
+      res.json({ likes: post.likes });
+    } catch (error) {
+      console.error('좋아요 처리 오류:', error);
+      res.status(500).json({ message: '서버 오류가 발생했습니다.' });
+    }
+  });
+
+  return router;
+};
+
+// 라우터 등록
+app.use('/api/ai-models', createMemoryAIModelsRouter());
+app.use('/api/news', createMemoryNewsRouter());
+app.use('/api/community', createMemoryCommunityRouter());
 
 // 기본 라우트
 app.get('/', (req, res) => {
