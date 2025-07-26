@@ -5,8 +5,9 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { CheckCircle, AlertCircle, Loader2, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
+import { withAdminAuth } from '@/contexts/AuthContext';
 
-export default function SeedDataPage() {
+function SeedDataPage() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<{
     success: boolean;
@@ -123,3 +124,5 @@ export default function SeedDataPage() {
     </div>
   );
 }
+
+export default withAdminAuth(SeedDataPage);

@@ -5,8 +5,9 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { CheckCircle, AlertCircle, Loader2, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
+import { withAdminAuth } from '@/contexts/AuthContext';
 
-export default function UpdatePricingPage() {
+function UpdatePricingPage() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<{
     success: boolean;
@@ -173,3 +174,5 @@ export default function UpdatePricingPage() {
     </div>
   );
 }
+
+export default withAdminAuth(UpdatePricingPage);

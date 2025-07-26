@@ -4,8 +4,9 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
+import { withAdminAuth } from '@/contexts/AuthContext';
 
-export default function ModelDetailsPage() {
+function ModelDetailsPage() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<{
     success: boolean;
@@ -162,3 +163,5 @@ export default function ModelDetailsPage() {
     </div>
   );
 }
+
+export default withAdminAuth(ModelDetailsPage);

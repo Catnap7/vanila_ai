@@ -5,8 +5,9 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CheckCircle, Copy, ExternalLink } from 'lucide-react';
 import { useState } from 'react';
+import { withAdminAuth } from '@/contexts/AuthContext';
 
-export default function CreateTablesPage() {
+function CreateTablesPage() {
   const [copied, setCopied] = useState(false);
 
   const aiModelsTableSQL = `
@@ -231,3 +232,5 @@ CREATE POLICY "AI 모델은 공개적으로 조회 가능" ON ai_models
     </div>
   );
 }
+
+export default withAdminAuth(CreateTablesPage);

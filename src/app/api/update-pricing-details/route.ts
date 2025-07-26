@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase';
+import { supabase, isAdmin, getCurrentUser } from '@/lib/supabase';
+import { validateRequestBody } from '@/lib/validation';
+import { z } from 'zod';
 
 // 개선된 가격 정보 데이터
 const updatedPricingDetails = [
@@ -216,6 +218,23 @@ const updatedPricingDetails = [
 
 export async function GET() {
   try {
+    // 인증 확인
+    const user = await getCurrentUser();
+    if (!user) {
+      return NextResponse.json(
+        { error: '인증이 필요합니다.' },
+        { status: 401 }
+      );
+    }
+
+    // 관리자 권한 확인
+    const isUserAdmin = await isAdmin(user.id);
+    if (!isUserAdmin) {
+      return NextResponse.json(
+        { error: '관리자 권한이 필요합니다.' },
+        { status: 403 }
+      );
+    }
     // 각 모델의 가격 정보 업데이트
     const results = await Promise.all(
       updatedPricingDetails.map(async (item) => {

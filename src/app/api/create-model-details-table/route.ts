@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase';
+import { supabase, isAdmin, getCurrentUser } from '@/lib/supabase';
 
 // AI 모델 상세 정보 테이블 생성 SQL
 const createTableSQL = `
@@ -141,6 +141,23 @@ const sampleData = [
 
 export async function GET() {
   try {
+    // 인증 확인
+    const user = await getCurrentUser();
+    if (!user) {
+      return NextResponse.json(
+        { error: '인증이 필요합니다.' },
+        { status: 401 }
+      );
+    }
+
+    // 관리자 권한 확인
+    const isUserAdmin = await isAdmin(user.id);
+    if (!isUserAdmin) {
+      return NextResponse.json(
+        { error: '관리자 권한이 필요합니다.' },
+        { status: 403 }
+      );
+    }
     // 테이블 생성
     const { error: createError } = await supabase.rpc('exec_sql', { sql: createTableSQL });
     

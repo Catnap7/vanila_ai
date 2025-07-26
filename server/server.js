@@ -17,9 +17,123 @@ const inMemoryDB = {
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// 미들웨어
-app.use(cors());
-app.use(express.json());
+// 보안 미들웨어 설정
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+
+// Helmet으로 기본 보안 헤더 설정
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+      fontSrc: ["'self'", "https://fonts.gstatic.com"],
+      imgSrc: ["'self'", "data:", "https:"],
+      scriptSrc: ["'self'"],
+      connectSrc: ["'self'", "https://*.supabase.co", "wss://*.supabase.co"],
+    },
+  },
+  crossOriginEmbedderPolicy: false, // Next.js와의 호환성을 위해 비활성화
+}));
+
+// 레이트 리미팅 설정
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15분
+  max: 100, // 최대 100개 요청
+  message: {
+    error: '너무 많은 요청이 발생했습니다. 잠시 후 다시 시도해주세요.',
+  },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+app.use(limiter);
+
+// CORS 설정 - 특정 도메인만 허용
+const corsOptions = {
+  origin: function (origin, callback) {
+    // 허용된 도메인 목록
+    const allowedOrigins = [
+      'http://localhost:3000',
+      'http://localhost:3001',
+      'https://vanillai.vercel.app',
+      'https://vanillai.com',
+      'https://www.vanillai.com'
+    ];
+
+    // 개발 환경에서는 origin이 없을 수 있음 (Postman, 모바일 앱 등)
+    if (!origin && process.env.NODE_ENV === 'development') {
+      return callback(null, true);
+    }
+
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('CORS 정책에 의해 차단되었습니다.'));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: [
+    'Content-Type',
+    'Authorization',
+    'X-Requested-With',
+    'Accept',
+    'Origin'
+  ],
+  credentials: true, // 쿠키 및 인증 정보 허용
+  optionsSuccessStatus: 200, // IE11 지원
+  maxAge: 86400, // 24시간 동안 preflight 캐시
+};
+
+app.use(cors(corsOptions));
+
+// JSON 파싱 미들웨어 (크기 제한 포함)
+app.use(express.json({
+  limit: '10mb',
+  verify: (req, res, buf) => {
+    // JSON 파싱 전 원본 데이터 저장 (서명 검증 등에 사용)
+    req.rawBody = buf;
+  }
+}));
+
+// URL 인코딩 미들웨어
+app.use(express.urlencoded({
+  extended: true,
+  limit: '10mb'
+}));
+
+// 입력 검증 및 정화 미들웨어
+const validator = require('validator');
+const xss = require('xss');
+
+// XSS 방지 미들웨어
+const sanitizeInput = (req, res, next) => {
+  const sanitizeObject = (obj) => {
+    for (const key in obj) {
+      if (typeof obj[key] === 'string') {
+        obj[key] = xss(obj[key]);
+      } else if (typeof obj[key] === 'object' && obj[key] !== null) {
+        sanitizeObject(obj[key]);
+      }
+    }
+  };
+
+  if (req.body) {
+    sanitizeObject(req.body);
+  }
+
+  if (req.query) {
+    sanitizeObject(req.query);
+  }
+
+  if (req.params) {
+    sanitizeObject(req.params);
+  }
+
+  next();
+};
+
+app.use(sanitizeInput);
 
 // 초기 데이터 로드
 const aiModelsData = require('./data/seedData').aiModelsData;

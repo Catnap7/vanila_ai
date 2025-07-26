@@ -1,19 +1,13 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
+import { env, validateSupabaseConfig, isAdminEmail } from './env';
 
 // 환경 변수에서 Supabase URL과 API 키를 가져옵니다
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+const supabaseUrl = env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseAnonKey = env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-// Supabase 설정이 유효한지 확인하는 함수
+// Supabase 설정이 유효한지 확인하는 함수 (환경 검증 모듈 사용)
 function isValidSupabaseConfig(url: string, key: string): boolean {
-  return (
-    url &&
-    key &&
-    url !== 'your_supabase_url_here' &&
-    key !== 'your_supabase_anon_key_here' &&
-    url.startsWith('https://') &&
-    url.includes('.supabase.co')
-  );
+  return validateSupabaseConfig();
 }
 
 // Supabase 클라이언트를 조건부로 생성합니다
@@ -40,6 +34,51 @@ export { supabase };
 // Supabase 사용 가능 여부를 확인하는 유틸리티 함수
 export const isSupabaseAvailable = (): boolean => {
   return supabase !== null;
+};
+
+// 현재 사용자 세션 확인
+export const getCurrentUser = async () => {
+  if (!supabase) return null;
+
+  try {
+    const { data: { session }, error } = await supabase.auth.getSession();
+    if (error) {
+      console.error('세션 확인 오류:', error);
+      return null;
+    }
+    return session?.user || null;
+  } catch (error) {
+    console.error('사용자 정보 확인 오류:', error);
+    return null;
+  }
+};
+
+// 관리자 권한 확인
+export const isAdmin = async (userId?: string) => {
+  if (!supabase) return false;
+
+  try {
+    const { data: { user }, error } = await supabase.auth.getUser();
+
+    if (error || !user) return false;
+
+    // 관리자 이메일 확인 (환경 검증 모듈 사용)
+    const isUserAdminEmail = isAdminEmail(user.email || '');
+
+    // 사용자 메타데이터에서 role 확인
+    const isAdminRole = user.user_metadata?.role === 'admin';
+
+    return isUserAdminEmail || isAdminRole;
+  } catch (error) {
+    console.error('관리자 권한 확인 오류:', error);
+    return false;
+  }
+};
+
+// 인증된 사용자인지 확인
+export const isAuthenticated = async (): Promise<boolean> => {
+  const user = await getCurrentUser();
+  return !!user;
 };
 
 // 타입 정의
