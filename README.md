@@ -9,8 +9,9 @@
 
 <div align="center">
   <h3>🎨 Enterprise-Grade Design System | ⚡ Advanced Animations | 🌟 Modern UI/UX</h3>
-  <p><strong>VanillaAI</strong>는 Notion, Linear, Vercel과 같은 엔터프라이즈급 디자인 시스템을 갖춘 차세대 AI 플랫폼입니다.</p>
-  <p>다양한 생성형 AI 모델을 비교하고 커뮤니티와 소통할 수 있는 현대적인 풀스택 웹 플랫폼입니다.</p>
+  <h3><strong>복잡한 AI의 세계, VanillaAI에서 가장 쉽게 탐색하세요.</strong></h3>
+  <p>수많은 생성형 AI 모델들의 성능, 가격, 특징을 한눈에 비교하고, 커뮤니티와 최신 트렌드를 나누는 공간입니다.</p>
+  <strong><a href="[여기에-라이브-데모-URL-입력]" target="_blank">🚀 라이브 데모 바로가기</a></strong>
 </div>
 
 ---
@@ -87,82 +88,12 @@
 - **Performance**: React.memo, useCallback, Code Splitting
 - **Testing**: Jest, React Testing Library (준비 중)
 
-🚀 VanillaAI - 차세대 AI 모델 비교 및 분석 플랫폼
-<div align="center">
-<h3><strong>복잡한 AI의 세계, VanillaAI에서 가장 쉽게 탐색하세요.</strong></h3>
-<p>수많은 생성형 AI 모델들의 성능, 가격, 특징을 한눈에 비교하고, 커뮤니티와 최신 트렌드를 나누는 공간입니다.</p>
-<p>
-<strong><a href="[여기에-라이브-데모-URL-입력]" target="_blank">🚀 라이브 데모 바로가기</a></strong>
-</p>
-</div>
-
-<br>
-
-<div align="center">
-
-<p><em>엔터프라이즈급 디자인 시스템으로 구현된 직관적인 UI/UX</em></p>
-</div>
-
-✨ 핵심 기능 (Key Features)
-VanillaAI는 AI 기술을 활용하고자 하는 모든 분들을 위해 강력하고 직관적인 기능들을 제공합니다.
-
-기능
-
-설명
-
-🔍 AI 모델 상세 비교
-
-여러 AI 모델의 성능, 가격, 주요 기능을 나란히 놓고 분석하여 당신의 프로젝트에 가장 적합한 모델을 찾아보세요.
-
-📊 인터랙티브 차트
-
-실시간 데이터를 기반으로 한 시각적 차트를 통해 모델별 성능을 직관적으로 이해할 수 있습니다.
-
-💬 전문가 커뮤니티
-
-현업 전문가부터 AI 입문자까지, 1만 명 이상의 사용자와 자유롭게 지식을 공유하고 토론하며 함께 성장하세요.
-
-📰 최신 AI 뉴스 & 트렌드
-
-매일 업데이트되는 AI 업계의 최신 동향과 전문가가 선별한 핵심 뉴스를 놓치지 마세요.
-
-🌓 사용자 맞춤 경험
-
-눈이 편안한 다크/라이트 모드와 모든 디바이스에 최적화된 반응형 디자인을 지원합니다.
-
-🛠️ 주요 기술 스택 (Tech Stack)
-VanillaAI는 안정적이고 확장 가능한 최신 기술들을 기반으로 구축되었습니다.
-
-Frontend: Next.js (App Router), React, TypeScript
-
-Styling: Tailwind CSS, Framer Motion
-
-Backend & DB: Supabase, Express.js
-
-UI Components: shadcn/ui
-
-📄 라이선스 (License)
-이 프로젝트는 MIT 라이선스를 따릅니다.
-
-<div align="center">
-<h3>🚀 VanillaAI - Where AI Meets Enterprise Design</h3>
-<p>
-<a href="https://github.com/Catnap7/vanila_ai/issues">🐛 버그 리포트</a> •
-<a href="https://github.com/Catnap7/vanila_ai/discussions">💬 토론</a>
-</p>
-</div>
-
-}
-```
-
-
-
 ## 📄 라이선스
 
 이 프로젝트는 [MIT 라이선스](LICENSE)를 따릅니다.
 
 ## 🎨 디자인 영감 & 기술 스택
-
+--- 
 ### 🌟 **Design Inspiration**
 - **[Notion](https://notion.so)** - 깔끔한 인터페이스와 정교한 인터랙션
 - **[Linear](https://linear.app)** - 미니멀한 디자인과 부드러운 애니메이션
