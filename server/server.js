@@ -1,10 +1,21 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const connectDB = require('./config/db');
+const { connectDB } = require('./config/db');
 
 // 환경 변수 설정
 dotenv.config();
+
+// MongoDB Atlas 연결 시도
+let isMongoConnected = false;
+(async () => {
+  isMongoConnected = await connectDB();
+  if (isMongoConnected) {
+    console.log('🎉 MongoDB Atlas 연결 완료 - 데이터베이스 모드로 실행');
+  } else {
+    console.log('⚠️ MongoDB Atlas 연결 실패 - 메모리 모드로 실행');
+  }
+})();
 
 // 메모리 내 데이터 저장소 (MongoDB 연결 실패 시 사용)
 const inMemoryDB = {
@@ -268,10 +279,30 @@ const createMemoryCommunityRouter = () => {
   return router;
 };
 
-// 라우터 등록
-app.use('/api/ai-models', createMemoryAIModelsRouter());
-app.use('/api/news', createMemoryNewsRouter());
-app.use('/api/community', createMemoryCommunityRouter());
+// MongoDB 라우터 import
+const aiModelsRouter = require('./routes/aiModels');
+const newsRouter = require('./routes/news');
+const communityRouter = require('./routes/community');
+
+// 라우터 등록 (MongoDB 연결 상태에 따라 동적 선택)
+const setupRoutes = () => {
+  if (isMongoConnected) {
+    // MongoDB Atlas 연결 시 데이터베이스 라우터 사용
+    console.log('📊 MongoDB Atlas 라우터를 사용합니다.');
+    app.use('/api/ai-models', aiModelsRouter);
+    app.use('/api/news', newsRouter);
+    app.use('/api/community', communityRouter);
+  } else {
+    // MongoDB 연결 실패 시 메모리 라우터 사용
+    console.log('💾 메모리 기반 라우터를 사용합니다.');
+    app.use('/api/ai-models', createMemoryAIModelsRouter());
+    app.use('/api/news', createMemoryNewsRouter());
+    app.use('/api/community', createMemoryCommunityRouter());
+  }
+};
+
+// 라우터 설정 (비동기 연결 완료 후)
+setTimeout(setupRoutes, 1000); // MongoDB 연결 시도 후 라우터 설정
 
 // 기본 라우트
 app.get('/', (req, res) => {
@@ -280,5 +311,8 @@ app.get('/', (req, res) => {
 
 // 서버 시작
 app.listen(PORT, () => {
-  console.log(`서버가 포트 ${PORT}에서 실행 중입니다.`);
+  console.log(`🚀 VanillaAI API 서버가 포트 ${PORT}에서 실행 중입니다.`);
+  console.log(`📊 데이터베이스 모드: ${isMongoConnected ? 'MongoDB Atlas' : '메모리 내 저장소'}`);
+  console.log(`🌐 서버 URL: http://localhost:${PORT}`);
+  console.log(`📝 API 문서: http://localhost:${PORT}/api`);
 });
