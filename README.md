@@ -87,333 +87,75 @@
 - **Performance**: React.memo, useCallback, Code Splitting
 - **Testing**: Jest, React Testing Library (준비 중)
 
-## 🎨 디자인 시스템 대변혁 (2024.07.25)
+🚀 VanillaAI - 차세대 AI 모델 비교 및 분석 플랫폼
+<div align="center">
+<h3><strong>복잡한 AI의 세계, VanillaAI에서 가장 쉽게 탐색하세요.</strong></h3>
+<p>수많은 생성형 AI 모델들의 성능, 가격, 특징을 한눈에 비교하고, 커뮤니티와 최신 트렌드를 나누는 공간입니다.</p>
+<p>
+<strong><a href="[여기에-라이브-데모-URL-입력]" target="_blank">🚀 라이브 데모 바로가기</a></strong>
+</p>
+</div>
 
-VanillaAI가 기본적인 바닐라 테마에서 **엔터프라이즈급 디자인 시스템**으로 완전히 변신했습니다!
+<br>
 
-### 🌈 **Color System Revolution**
-- ✨ **Rich Palette**: 단조로운 크림색에서 정교한 블루/바이올렛 팔레트로 변환
-- 🎯 **Primary Colors**: 생동감 있는 블루 (#3B82F6) + 세련된 바이올렛 (#8B5CF6)
-- 🎨 **Semantic Colors**: Success, Warning, Error, Info 변형으로 직관적 UI
-- 🌙 **Perfect Dark Mode**: 리치 네이비 배경과 밝은 액센트 컬러의 조화
+<div align="center">
 
-### ✨ **Advanced Visual Effects**
-- 🌟 **Particle Systems**: Canvas 기반 파티클 애니메이션 (Dots, Grid, Waves, Particles)
-- 🧲 **Magnetic Buttons**: 마우스를 따라 움직이는 자기장 효과
-- 💫 **Glass Morphism**: 백드롭 블러와 투명도로 현대적 느낌
-- 🎭 **Hover Effects**: 스포트라이트, 글로우, 리플 효과
+<p><em>엔터프라이즈급 디자인 시스템으로 구현된 직관적인 UI/UX</em></p>
+</div>
 
-### 🎯 **Component Enhancement**
-- 🔘 **Button System**: 9가지 변형 + 호버 엘리베이션 + 마이크로 인터랙션
-- 📋 **Card Components**: 정교한 그림자 + 호버 애니메이션 + 보더 효과
-- 🏷️ **Badge System**: 시맨틱 컬러 + 그라디언트 변형 + 다양한 크기
-- ⏳ **Loading States**: 4가지 애니메이션 + 시머 효과 + 스켈레톤 UI
+✨ 핵심 기능 (Key Features)
+VanillaAI는 AI 기술을 활용하고자 하는 모든 분들을 위해 강력하고 직관적인 기능들을 제공합니다.
 
-### 🏗️ **Layout & Navigation**
-- 📱 **Sticky Header**: 스크롤 기반 백드롭 블러 + 애니메이션 햄버거 메뉴
-- 🦶 **Enhanced Footer**: 그라디언트 배경 + 서비스 상태 표시기
-- 🎨 **Typography System**: Display, Heading, Body 계층 + 그라디언트 텍스트
+기능
 
-### 🏠 **Home Page Transformation**
-- 🚀 **Hero Section**: 파티클 배경 + 그라디언트 오브 + 플로팅 엘리먼트
-- 📊 **Statistics**: 엔터프라이즈급 스탯 카드 + 아이콘 + 변화 지표
-- 🤖 **AI Models**: 호버 효과 + 배지 + 리빌 애니메이션
-- 📰 **News Section**: 정교한 레이아웃 + 시머 로딩
-- 👥 **Community**: 애니메이션 배경 + 커뮤니티 통계
+설명
 
-## 📁 프로젝트 구조
+🔍 AI 모델 상세 비교
 
-```
-vanillai-ai/
-├── 📁 public/                    # 정적 파일 (이미지, 아이콘 등)
-├── 📁 server/                    # Express.js 백엔드 서버
-│   ├── 📁 config/               # 데이터베이스 및 서버 설정
-│   ├── 📁 data/                 # 초기 데이터 및 시드 파일
-│   ├── 📁 models/               # MongoDB 스키마 정의
-│   ├── 📁 routes/               # API 라우트 핸들러
-│   └── 📄 server.js             # 메인 서버 파일
-├── 📁 src/
-│   ├── 📁 app/                  # Next.js App Router 페이지
-│   │   ├── 📁 ai-models/        # AI 모델 관련 페이지
-│   │   ├── 📁 community/        # 커뮤니티 페이지
-│   │   ├── 📁 news/             # 뉴스 페이지
-│   │   ├── 📄 globals.css       # 🎨 Enterprise Design System
-│   │   ├── 📄 layout.tsx        # 루트 레이아웃
-│   │   └── 📄 page.tsx          # 🏠 Transformed Homepage
-│   ├── 📁 components/           # 재사용 가능한 컴포넌트
-│   │   ├── 📁 layout/           # 레이아웃 컴포넌트
-│   │   │   ├── 📄 Header.tsx    # ✨ Enhanced Navigation
-│   │   │   └── 📄 Footer.tsx    # 🎨 Gradient Footer
-│   │   ├── 📁 theme/            # 테마 관련 컴포넌트
-│   │   ├── 📁 ui/               # 🎯 Enterprise UI Components
-│   │   │   ├── 📄 button.tsx    # 🔘 9 Variants + Hover Effects
-│   │   │   ├── 📄 card.tsx      # 📋 Enhanced Cards
-│   │   │   ├── 📄 badge.tsx     # 🏷️ Semantic Badges
-│   │   │   ├── 📄 loading.tsx   # ⏳ 4 Animation Variants
-│   │   │   ├── 📄 stats-card.tsx        # 📊 NEW: Dashboard Stats
-│   │   │   ├── 📄 animated-background.tsx # 🌟 NEW: Particle Systems
-│   │   │   └── 📄 hover-effects.tsx     # ✨ NEW: Interactive Effects
-│   │   ├── 📄 ErrorBoundary.tsx # 전역 에러 처리
-│   │   └── 📄 *.tsx             # 기능별 컴포넌트
-│   └── 📁 lib/                  # 유틸리티 및 설정
-│       ├── 📄 api.ts            # API 호출 함수 (타입 안전)
-│       ├── 📄 auth.ts           # Supabase 인증
-│       ├── 📄 constants.ts      # 앱 전역 상수
-│       ├── 📄 supabase.ts       # Supabase 클라이언트
-│       └── 📄 utils.ts          # 공통 유틸리티
-├── 📄 .env.example              # 환경 변수 템플릿
-├── 📄 next.config.ts            # Next.js 설정 (최적화 적용)
-├── 📄 tsconfig.json             # TypeScript 설정 (엄격 모드)
-└── 📄 tailwind.config.js        # 🎨 Enhanced Design Tokens
-```
+여러 AI 모델의 성능, 가격, 주요 기능을 나란히 놓고 분석하여 당신의 프로젝트에 가장 적합한 모델을 찾아보세요.
 
-### 🎨 **새로운 디자인 시스템 컴포넌트**
+📊 인터랙티브 차트
 
-#### 🌟 **animated-background.tsx**
-- **ParticleSystem**: Canvas 기반 파티클 애니메이션 (연결선 포함)
-- **GradientOrb**: 플로팅 그라디언트 장식 요소
-- **FloatingElements**: 주변 애니메이션 효과
-- **4가지 배경 변형**: Dots, Grid, Waves, Particles
+실시간 데이터를 기반으로 한 시각적 차트를 통해 모델별 성능을 직관적으로 이해할 수 있습니다.
 
-#### ✨ **hover-effects.tsx**
-- **HoverCard**: 마우스 추적 스포트라이트 효과
-- **MagneticButton**: 자기장 끌림 애니메이션
-- **ParallaxElement**: 스크롤 기반 패럴랙스
-- **RevealAnimation**: 인터섹션 옵저버 기반 등장 효과
-- **RippleEffect**: 클릭 시 리플 애니메이션
+💬 전문가 커뮤니티
 
-#### 📊 **stats-card.tsx**
-- **배경 장식**: 그라디언트 배경과 아이콘 지원
-- **변화 지표**: 증가/감소 표시기
-- **다양한 변형**: Primary, Success, Warning, Error, Info
-- **호버 효과**: 엘리베이션과 그림자 변화
+현업 전문가부터 AI 입문자까지, 1만 명 이상의 사용자와 자유롭게 지식을 공유하고 토론하며 함께 성장하세요.
 
-## 📊 데이터 모델
+📰 최신 AI 뉴스 & 트렌드
 
-### AIModel Interface
-```typescript
-interface AIModel {
-  id: number;
-  name: string;
-  category: string;
-  company: string;
-  pricing: string;
-  features: string[];
-  popularity: number;
-  releaseDate: string;
-  image?: string;
-  description?: string;
+매일 업데이트되는 AI 업계의 최신 동향과 전문가가 선별한 핵심 뉴스를 놓치지 마세요.
+
+🌓 사용자 맞춤 경험
+
+눈이 편안한 다크/라이트 모드와 모든 디바이스에 최적화된 반응형 디자인을 지원합니다.
+
+🛠️ 주요 기술 스택 (Tech Stack)
+VanillaAI는 안정적이고 확장 가능한 최신 기술들을 기반으로 구축되었습니다.
+
+Frontend: Next.js (App Router), React, TypeScript
+
+Styling: Tailwind CSS, Framer Motion
+
+Backend & DB: Supabase, Express.js
+
+UI Components: shadcn/ui
+
+📄 라이선스 (License)
+이 프로젝트는 MIT 라이선스를 따릅니다.
+
+<div align="center">
+<h3>🚀 VanillaAI - Where AI Meets Enterprise Design</h3>
+<p>
+<a href="https://github.com/Catnap7/vanila_ai/issues">🐛 버그 리포트</a> •
+<a href="https://github.com/Catnap7/vanila_ai/discussions">💬 토론</a>
+</p>
+</div>
+
 }
 ```
 
-### News Interface
-```typescript
-interface News {
-  id: number;
-  title: string;
-  date: string;
-  source: string;
-  image?: string;
-  excerpt: string;
-  content?: string;
-  tags: string[];
-}
-```
 
-### CommunityPost Interface
-```typescript
-interface CommunityPost {
-  id: number;
-  title: string;
-  author: {
-    name: string;
-    avatar?: string;
-  };
-  date: string;
-  content: string;
-  excerpt: string;
-  comments: number;
-  likes: number;
-  views: number;
-  tags: string[];
-}
-```
-
-## 🚀 빠른 시작
-
-### ⚡ **즉시 체험하기**
-```bash
-# 1. 저장소 클론
-git clone https://github.com/Catnap7/vanila_ai.git
-cd vanila_ai
-
-# 2. 의존성 설치
-npm install
-
-# 3. 환경 변수 설정 (선택사항)
-cp .env.example .env.local
-
-# 4. 개발 서버 실행
-npm run dev
-```
-
-🌟 **http://localhost:3000**에서 새로운 엔터프라이즈 디자인을 확인하세요!
-
-### 📋 **상세 설치 가이드**
-더 자세한 설정은 **[SETUP.md](./SETUP.md)** 파일을 참조하세요:
-- 🔧 사전 요구사항 및 시스템 설정
-- ⚙️ 환경 변수 구성 (Supabase, MongoDB)
-- 🚀 개발/프로덕션 서버 실행
-- 🐛 문제 해결 및 디버깅 가이드
-- 📦 배포 준비 및 최적화
-
-### 🎨 **디자인 시스템 미리보기**
-- **라이트 모드**: 깔끔한 화이트/그레이 배경 + 생동감 있는 블루 액센트
-- **다크 모드**: 리치 네이비 배경 + 밝은 액센트 컬러
-- **애니메이션**: 파티클 시스템, 호버 효과, 마이크로 인터랙션
-- **반응형**: 모바일, 태블릿, 데스크톱 완벽 지원
-
-## 🔧 개발 가이드라인
-
-### TypeScript 사용
-- **엄격 모드**: 모든 TypeScript 엄격 옵션이 활성화되어 있습니다
-- **타입 정의**: `src/lib/api.ts`에서 공통 인터페이스를 사용하세요
-- **타입 안전성**: `any` 타입 사용을 피하고 명시적 타입을 정의하세요
-
-### 컴포넌트 개발
-- **React.memo**: 성능 최적화가 필요한 컴포넌트에 사용
-- **useCallback**: 자식 컴포넌트에 전달되는 함수에 사용
-- **Error Boundary**: 에러 처리가 필요한 컴포넌트를 `ErrorBoundary`로 감싸세요
-
-### 코드 스타일
-- **ESLint**: 코드 품질 검사 도구 사용
-- **Prettier**: 코드 포맷팅 자동화
-- **Tailwind CSS**: 스타일링에 Tailwind 유틸리티 클래스 사용
-
-### 상태 관리
-- **로컬 상태**: `useState`, `useReducer` 사용
-- **전역 상태**: Context API 또는 상태 관리 라이브러리 고려
-- **서버 상태**: API 호출 결과는 적절한 로딩/에러 상태와 함께 관리
-
-## 📡 API 문서
-
-### 기본 구조
-- **Base URL**: `http://localhost:5000/api`
-- **인증**: Supabase Auth 토큰 기반
-- **응답 형식**: JSON
-- **에러 처리**: 표준 HTTP 상태 코드 사용
-
-### 주요 엔드포인트
-
-#### AI 모델 API
-```
-GET    /api/ai-models          # 모든 AI 모델 조회
-GET    /api/ai-models/:id      # 특정 AI 모델 조회
-POST   /api/ai-models          # 새 AI 모델 추가
-PATCH  /api/ai-models/:id      # AI 모델 수정
-DELETE /api/ai-models/:id      # AI 모델 삭제
-```
-
-#### 뉴스 API
-```
-GET    /api/news               # 모든 뉴스 조회
-GET    /api/news/:id           # 특정 뉴스 조회
-POST   /api/news               # 새 뉴스 추가
-```
-
-#### 커뮤니티 API
-```
-GET    /api/community          # 모든 게시글 조회
-GET    /api/community/:id      # 특정 게시글 조회
-POST   /api/community/:id/like # 게시글 좋아요
-```
-
-### Fallback 메커니즘
-API는 Supabase → Express 서버 순으로 fallback을 지원합니다:
-1. 먼저 Supabase에서 데이터 조회 시도
-2. 실패 시 Express 서버의 메모리 기반 데이터 사용
-3. 모든 API 호출에 에러 처리 및 재시도 로직 포함
-
-## ⚡ 성능 & 최적화
-
-### 🎨 **디자인 시스템 성능**
-- **CSS Custom Properties**: 테마 전환 시 부드러운 애니메이션
-- **Hardware Acceleration**: GPU 가속 애니메이션 (transform, opacity)
-- **Optimized Animations**: 60fps 유지를 위한 최적화된 키프레임
-- **Lazy Loading**: 인터섹션 옵저버 기반 지연 로딩
-
-### 🚀 **프론트엔드 최적화**
-- **React.memo**: 컴포넌트 메모이제이션으로 불필요한 리렌더링 방지
-- **useCallback**: 함수 메모이제이션으로 자식 컴포넌트 최적화
-- **코드 분할**: Next.js 자동 코드 분할 및 지연 로딩
-- **이미지 최적화**: Next.js Image 컴포넌트로 WebP/AVIF 형식 지원
-- **Bundle Analysis**: 번들 크기 최적화 및 트리 쉐이킹
-
-### ✨ **고급 로딩 상태**
-- **Shimmer Effects**: 시머 애니메이션으로 로딩 상태 시각화
-- **Skeleton UI**: 4가지 로딩 애니메이션 변형 (Spinner, Dots, Pulse, Bars)
-- **Progressive Loading**: 점진적 콘텐츠 로딩으로 체감 성능 향상
-- **Error Boundaries**: 우아한 에러 처리 및 폴백 UI
-
-### 🔧 **서버 & 인프라**
-- **Compression**: Gzip/Brotli 압축으로 응답 크기 최소화
-- **Caching Strategy**: 적절한 HTTP 캐시 헤더 설정
-- **Security Headers**: XSS, CSRF, CSP 등 보안 위협 방지
-- **API Optimization**: 요청 최적화 및 에러 핸들링
-
-## 🚀 배포
-
-### 프론트엔드 배포 (Vercel 권장)
-```bash
-# Vercel CLI 설치
-npm i -g vercel
-
-# 배포
-vercel --prod
-```
-
-### 백엔드 배포 (Render/Railway 권장)
-1. GitHub 저장소를 배포 서비스에 연결
-2. 환경 변수 설정 (MongoDB URI, PORT 등)
-3. 자동 배포 설정
-
-### 환경별 설정
-- **개발**: `npm run dev` (Hot reload 지원)
-- **프로덕션**: `npm run build && npm start`
-- **테스트**: `npm test` (Jest 기반 테스트)
-
-## 🤝 기여하기
-
-### 기여 절차
-1. **Fork**: 이 저장소를 포크합니다
-2. **Branch**: 새 기능 브랜치를 생성합니다
-   ```bash
-   git checkout -b feature/amazing-feature
-   ```
-3. **Commit**: 변경사항을 커밋합니다
-   ```bash
-   git commit -m 'feat: add amazing feature'
-   ```
-4. **Push**: 브랜치에 푸시합니다
-   ```bash
-   git push origin feature/amazing-feature
-   ```
-5. **PR**: Pull Request를 생성합니다
-
-### 커밋 메시지 규칙
-- `feat:` 새로운 기능 추가
-- `fix:` 버그 수정
-- `docs:` 문서 수정
-- `style:` 코드 포맷팅
-- `refactor:` 코드 리팩토링
-- `test:` 테스트 추가/수정
-- `chore:` 빌드 프로세스 또는 보조 도구 변경
-
-### 코드 리뷰 가이드라인
-- TypeScript 타입 안전성 확인
-- 성능 최적화 고려사항 검토
-- 접근성 및 사용자 경험 개선
-- 테스트 코드 포함 여부 확인
 
 ## 📄 라이선스
 
