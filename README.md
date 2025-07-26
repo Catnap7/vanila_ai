@@ -56,42 +56,6 @@
 - **접근성**: WCAG 2.1 AA 준수
 - **성능 최적화**: 빠른 로딩과 부드러운 애니메이션
 
-## 🛠️ 기술 스택
-
-### 🎨 **Frontend & Design System**
-- **Framework**: Next.js 15.2.4 (App Router) with React 19.0.0
-- **Language**: TypeScript 5.0+ (Strict Mode)
-- **Styling**: Tailwind CSS 4.0+ with Custom Design Tokens
-- **UI Components**: shadcn/ui + Custom Enterprise Components
-- **Animations**: Framer Motion, CSS Keyframes, Canvas API
-- **State Management**: React Hooks, Context API, Zustand
-
-### 🎭 **Advanced UI Features**
-- **Design System**: Enterprise-grade components (Button, Card, Badge, Loading)
-- **Visual Effects**: Particle Systems, Magnetic Buttons, Glass Morphism
-- **Animations**: Reveal, Parallax, Hover Effects, Micro-interactions
-- **Theme System**: CSS Custom Properties, Light/Dark Mode
-- **Typography**: Custom font hierarchy with gradient text effects
-
-### ⚡ **Backend & Infrastructure**
-- **Runtime**: Node.js with Express.js 4.x
-- **Database**: MongoDB with Mongoose ODM + Supabase
-- **Authentication**: Supabase Auth with JWT
-- **API Architecture**: RESTful API with Fallback Mechanisms
-- **Performance**: Compression, Caching, Security Headers
-
-### 🔧 **Development & Quality**
-- **Package Manager**: npm/yarn/pnpm
-- **Code Quality**: ESLint, Prettier, Husky
-- **Type Safety**: Strict TypeScript + Interface Definitions
-- **Error Handling**: Global Error Boundaries + Fallback UI
-- **Performance**: React.memo, useCallback, Code Splitting
-- **Testing**: Jest, React Testing Library (준비 중)
-
-## 📄 라이선스
-
-이 프로젝트는 [MIT 라이선스](LICENSE)를 따릅니다.
-
 ## 🎨 디자인 영감 & 기술 스택
 --- 
 ### 🌟 **Design Inspiration**
@@ -114,6 +78,10 @@
 - **[Inter Font](https://rsms.me/inter/)** - 모던 타이포그래피
 
 ---
+
+## 📄 라이선스
+
+이 프로젝트는 [MIT 라이선스](LICENSE)를 따릅니다.
 
 <div align="center">
   <h3>🚀 VanillaAI - Where AI Meets Enterprise Design</h3>
