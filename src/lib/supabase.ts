@@ -1,9 +1,9 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
-import { env, validateSupabaseConfig, isAdminEmail } from './env';
+import { clientEnv, validateSupabaseConfig, isAdminEmail } from './env';
 
-// 환경 변수에서 Supabase URL과 API 키를 가져옵니다
-const supabaseUrl = env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseAnonKey = env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+// 환경 변수에서 Supabase URL과 API 키를 가져옵니다 (client-safe)
+const supabaseUrl = clientEnv.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseAnonKey = clientEnv.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
 // Supabase 설정이 유효한지 확인하는 함수 (환경 검증 모듈 사용)
 function isValidSupabaseConfig(url: string, key: string): boolean {
